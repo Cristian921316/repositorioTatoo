@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {			
+			
+			
+			$("#btnBuscar").click(function() {					
+				var txtBuscar= document.getElementById("txtBuscarMarca").value;
+				if (txtBuscar.length>0)
+				{
+					window.location.href="/listarMarcas/"+txtBuscar;	
+				}else
+					{
+					window.location.href="/listarMarcas/";	
+					
+					}
+				
+			});
+			
+			
+		});
+		
+		
+			
+	</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<div th:object="${productos}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+						role="alert">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/GuardarProducto}" th:object="${productos}"
+					method="post">
+
+					<input type="hidden" th:field="*{pk_producto}" class="form-control" />
+					<input type="hidden" th:field="*{marca_pk}" class="form-control" />
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{nombre}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Style
+							Number</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{style_number}"
+								class="form-control" th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('style_number')}"
+								th:errors="*{style_number}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">UPC</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{upc}" class="form-control"
+								th:errorclass="'form-control alert-danger'" readonly="readonly"/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('upc')}" th:errors="*{upc}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Talla</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{talla}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('talla')}" th:errors="*{talla}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Color</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{color}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">							
+						<label for="nombre" class="col-sm-2 col-form-label">Oem</label>
+						<div class="col-sm-6">							
+								<input  type="radio" name="gridRadios" id="gridRadios1" value="1" th:field="*{oem}"  />
+								<label for="nombre" class="col-sm-2 col-form-label">Si</label>
+								<input  type="radio" name="gridRadios" id="gridRadios1" value="0" checked="checked" th:field="*{oem}"   />
+								<label for="nombre" class="col-sm-2 col-form-label">No</label>							
+						</div>									
+					</div>
+
+					<div class="form-group row">						
+							
+						<label for="nombre" class="col-sm-2 col-form-label">Tipo Bicicleta</label>
+						<div class="col-sm-6">							
+								<input  type="radio" name="gridRadios" id="gridRadios1" value="1" th:field="*{tipo}"  />
+								<label for="nombre" class="col-sm-2 col-form-label">Si</label>
+								<input  type="radio" name="gridRadios" id="gridRadios1" value="0" checked="checked"  th:field="*{tipo}"  />
+								<label for="nombre" class="col-sm-2 col-form-label">No</label>							
+						</div>
+										
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+
+							<input type="submit" value="Guardar" class="btn btn-primary" />
+
+							<a class="btn btn-danger btn-xs"
+								href="javascript:history.back(1)" th:text="'Regresar'"></a>
+
+						</div>
+
+					</div>
+
+
+
+				</form>
+
+			</div>
+		</div>
+
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

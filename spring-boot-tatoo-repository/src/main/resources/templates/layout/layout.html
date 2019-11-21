@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no"/>
+<title th:text="'Repositorio: - ' + ${titulo}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+</head>
+<body>
+	<header th:fragment="header">
+
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Repositorio-Tatoo</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" th:href="@{/}">Inicio
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle"
+						id="navbarDropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="true"> Marcas </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" th:href="@{/listarMarcas}">Ver</a> 
+							<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/formMarca}">Crear</a> 							
+						</div>
+					</li>					
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle"
+						id="navbarDropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="true"> Productos </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" th:href="@{/gestionProductos}">Gestionar Productos</a> 
+							<a class="dropdown-item" th:href="@{/formProducto}">Crear</a> 							
+						</div>
+					</li>
+					
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')"><a
+						class="nav-link dropdown-toggle"
+						id="navbarDropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="true">Usuarios</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/formUsuario}">Permisos</a>
+							<a class="dropdown-item" th:href="@{/formCuenta}">Editar Cuenta</a> 	 											
+						</div>
+																	
+						
+					</li>		
+					
+					<li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')"><a 
+						class="nav-link dropdown-toggle"
+						id="navbarDropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="true">Auditoria</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" th:href="@{/listarAuditoria}">Historial</a>								 											
+						</div>
+																	
+						
+					</li>					
+					
+				</ul>
+				<ul class="navbar-nav navbar-right">
+					<li sec:authorize="!isAuthenticated()"><a
+						class="btn btn-outline-primary" th:href="@{/login}">Sign In</a></li>
+
+					<li sec:authorize="isAuthenticated()" class="dropdown show">
+						<a class="btn btn-outline-primary dropdown-toggle" href="#"
+							role="button" id="dropdownMenuLink" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"><span sec:authentication="name" id="txtSessionUsuario" name="txtSessionUsuario"></span></a>
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<form id="logoutForm" th:action="@{/logout}" method="post">
+								<button class="dropdown-item" onclick="document.getElementById('logoutForm').submit();" type="submit">Sign Out</button>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+							</form>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="alert alert-success" th:if="${success != null}"
+			th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning != null}"
+			th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info != null}"
+			th:text="${info}"></div>
+	</header>
+
+	<div class="container"></div>
+
+	<footer th:fragment="footer" class="container">
+		<hr />
+		<img th:src="@{/images/tatoo.png}" alt="Tatoo" />
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Bootstrap JS -->
+		<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+		<script th:src="@{/js/popper.js}"></script>		
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+	</footer>
+</body>
+</html>

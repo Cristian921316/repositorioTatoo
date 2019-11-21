@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {	
+			var url;	
+			var marca = $("#marca_pk").val();
+			
+			$("#marca_pk").change(function() {
+				marca = $("#marca_pk").val();
+				url= "../buscarMarca/"+marca;
+				location=url;
+			});		
+			
+			
+			$("#btnBuscar").click(function() {	
+				var txtBuscar= document.getElementById("txtBuscar").value;
+				var lstr_motivo = document.getElementById("txtMotivo").value;	
+				marca = $("#marca_pk").val();
+				if (txtBuscar.length>0)
+				{
+					
+					if(marca !== "0")
+					{
+					
+						
+						
+						switch (lstr_motivo) {
+						case "Style Number":
+							url = "../buscarStyle/"+txtBuscar
+							break;					
+						case "Upc":
+							url = "../buscarUpc/"+txtBuscar
+							break;					
+						default:
+							url = "../buscarNombre/"+txtBuscar
+							break;
+						}				
+						
+						location=url;
+					
+					}else
+						{						
+							switch (lstr_motivo) {
+							case "Style Number":
+								url = "../buscarAllStyle/"+txtBuscar
+								break;					
+							case "Upc":
+								url = "../buscarAllUpc/"+txtBuscar
+								break;					
+							default:
+								url = "../buscarAllNombre/"+txtBuscar
+								break;
+							}				
+							
+							location=url;
+						}
+				}else{
+					
+					var marca = $("#marca_pk").val();
+					url = "../buscarMarca/"+marca;
+					location=url;
+				}
+				
+			});
+			
+			
+		});
+		
+		
+			
+	</script>
+</body>
+</html>

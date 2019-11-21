@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {			
+			$("#divClave").hide();
+			$("#divClaveContenedor").hide();
+			
+			$("#btnCambiarClave").click(function() {	
+				$("#divClave").show();
+				$("#divClaveContenedor").show();
+				$("#ContenedorCuenta").hide();
+				$("#divCuenta").hide();
+				
+			});
+			
+			$("#btnCancelarClave").click(function() {	
+				$("#divClave").hide();
+				$("#divClaveContenedor").hide();
+				$("#ContenedorCuenta").show();
+				$("#divCuenta").show();
+				
+			});
+			
+			
+		});
+		
+		
+			
+	</script>
+</body>
+</html>

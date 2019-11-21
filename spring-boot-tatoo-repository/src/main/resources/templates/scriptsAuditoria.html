@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {				
+			$.getJSON('http://api.wipmania.com/jsonp?callback=?', function (data) {			   
+			    document.getElementById('txtPais').value = data.address.country;
+			});		
+			
+		});
+		
+		
+			
+	</script>
+</body>
+</html>

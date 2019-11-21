@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" id="divCuenta">Edicion Datos</div>
+			<div class="card-body" id="ContenedorCuenta">
+
+				<div th:object="${usuario}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+						role="alert">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/GuardarCuenta}" th:object="${usuario}"
+					method="post">
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Nombres</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{nombre}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Apellidos</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{apellido}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+						</div>
+					</div>
+					
+					
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-primary" />
+							<a class="btn btn-success btn-xs" id="btnCambiarClave"
+								name="btnCambiarClave" href="#">Cambiar Clave</a> <a
+								class="btn btn-danger btn-xs" th:href="@{/}"
+								th:text="'Cancelar'"></a>
+
+						</div>
+
+					</div>
+
+
+				</form>
+
+
+			</div>
+			<div class="card-header " id="divClave" name="divClave">Cambio de Clave</div>
+			<form th:action="@{/CambioClave}" th:object="${usuario}" method="post">
+			<div class="card-body " id="divClaveContenedor" name="divClaveContenedor">
+				
+				<div class="form-group row">
+					<label for="nombre" class="col-sm-2 col-form-label">Nueva Clave</label>
+					<div class="col-sm-6">
+						<input type="password" id="txtClaveNueva" name="txtClaveNueva" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="nombre" class="col-sm-2 col-form-label">Confirmar Clave</label>
+					<div class="col-sm-6">
+						<input type="password" id="txtClaveConfirma" name="txtClaveConfirma" class="form-control" /> 
+					</div>
+				</div>
+				<div class="form-group column">
+					<input type="submit" value="Guardar" class="btn btn-primary" />
+					<a class="btn btn-danger btn-xs" th:href="@{/}" id ="btnCancelarClave">Cancelar</a>
+				</div>
+				
+			</div>
+			</form>
+
+		</div>
+		
+		
+
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="ScriptCuenta :: javascript"></script>
+</body>
+</html>

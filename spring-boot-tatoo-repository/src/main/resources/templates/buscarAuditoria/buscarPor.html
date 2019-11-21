@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {			
+			
+			
+			$("#btnBuscar").click(function() {				
+				var txtBuscar= document.getElementById("txtBuscarHistorial").value;
+				location="../listarAuditoria/"+txtBuscar;	
+			});
+			
+			
+		});
+		
+		
+			
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card border-primary text-center">
+			<div class="card-header alert alert-success">SGR-SISTEMA DE GESTION DEL REPOSITORIO</div>
+			<div class="card-body">
+			
+				<H1>Bievenidos</H1>
+				<img th:src="@{/images/bd_repos.png}" alt="Repos" />
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>	
+</body>
+</html>

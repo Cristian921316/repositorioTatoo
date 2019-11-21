@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	
+	<div class="container py-4">
+	
+	 
+		<div class="card bg-light">
+			<div class="card-header" >Gestion de Usuarios</div>
+			<div class="card-header">
+				
+				<form class="form-inline" method="post">
+
+					<div class="form-group column">
+						<div class="form-group column">
+							<select class="form-control" name="marca_pk" id="marca_pk">
+								<option th:text="*{itemMarca}" th:value="*{marcaId}"></option>	
+								<option th:each="marca: ${marcas}" th:text="${marca.nombre}"
+									th:value="${marca.marca_pk}"></option>
+							</select>
+						</div>
+
+						<div class="form-group column">
+							<select class="form-control" name="txtMotivo" id="txtMotivo" >
+								<option th:text="*{itemBusqueda}"></option>	
+								<option>Nombre</option>							
+								<option>Style Number</option>
+								<option>Upc</option>							
+							</select>
+						</div>
+
+						<div class="form-group column">
+							<input type="text" id="txtBuscar" name="txtBuscar"
+								class="form-control" placeholder="Buscar..."  />
+						</div>
+
+					</div>
+
+					<div class="form-group column">
+						&nbsp;&nbsp;
+						<a class="btn btn-primary" id="btnBuscar" href="#"
+							th:text="'Aceptar'"  ></a>
+							&nbsp;&nbsp;
+						<a class="btn btn-danger" id="btnBuscar" th:href="@{/gestionProductos}"
+							th:text="'Reset'"  ></a>	
+					</div>
+					
+					<div class="form-group column">		
+					&nbsp;&nbsp; &nbsp;&nbsp; 
+					<label for="txtBuscar" class="col-sm-2 col-form-label">Total</label>
+					<input type="text" th:value="*{ParamBusqueda}" id="txtBuscar" name = "txtBuscar" class="form-control" disabled="disabled" style="text-align:center" />
+					&nbsp;&nbsp;
+					<a href="#" class="btn btn-info disabled" ><i class="fas fa-print"></i></a>	
+					</div>
+					
+				</form>
+			</div>
+
+			<div class="card-header">
+				<form class="form-inline" method="post" th:action="@{/subirExcel/}" enctype="multipart/form-data">
+					<div class="form-group column">
+						<input type="file" class="form-control" id="file" name = "file" disabled="disabled"/>
+					</div>
+					<div class="col-sm-3 col-form-column">						
+						<input type="submit" accept="application/vnd.ms-excel" class="btn btn-info" id="txtSubir" value="Subir" disabled="disabled" /> 
+					</div>
+					<div class="col-sm-3 col-form-column">						
+						<input type="checkbox" checked="1" />Actualizar Paises						
+					</div>
+				</form>
+				
+			</div>
+
+			<div class="card-body">
+				<table class="table table-striped table-bordered">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Id</th>
+							<th>Marca</th>
+							<th>Style Number</th>
+							<th>Upc</th>
+							<th>Nombre</th>
+							<th>Talla</th>
+							<th>Color</th>
+							<th>Oem</th>	
+							<th>Bicicleta</th>							
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="buscarProductos/buscarPor :: javascript"></script>
+</body>
+</html>
